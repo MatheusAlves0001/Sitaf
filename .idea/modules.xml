@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/teste-sitaf.iml" filepath="$PROJECT_DIR$/.idea/teste-sitaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Sitaf.iml" filepath="$PROJECT_DIR$/.idea/Sitaf.iml" />
+      <module fileurl="file://$PROJECT_DIR$/teste-sitaf/teste-sitaf.iml" filepath="$PROJECT_DIR$/teste-sitaf/teste-sitaf.iml" />
     </modules>
   </component>
 </project>

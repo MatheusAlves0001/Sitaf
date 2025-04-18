@@ -8,9 +8,10 @@ import com.teste.sitaf.Repositories.ProductRepository;
 import com.teste.sitaf.Specifiactions.CategorySpecification;
 import com.teste.sitaf.Specifiactions.ProductSpecification;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.awt.dnd.InvalidDnDOperationException;
@@ -21,10 +22,10 @@ import java.util.Optional;
 @Service
 public class CategoryService {
 
-    private CategoryMapper categoryMapper;
-    private CategoryRepository categoryRepository;
+    private final CategoryMapper categoryMapper;
+    private final CategoryRepository categoryRepository;
 
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
 
     public CategoryService(CategoryRepository categoryRepository, CategoryMapper categoryMapper, ProductRepository productRepository) {
         this.categoryRepository = categoryRepository;
@@ -37,34 +38,35 @@ public class CategoryService {
         if(id <= 0)
             throw new InvalidParameterException("Set categoryId, please");
 
-        var spec = CategorySpecification.hasCategory(id);
-        Optional<CategoryModel> category = categoryRepository.findOne(spec);
+        CategoryModel category = categoryRepository.findOne(CategorySpecification.hasCategory(id))
+                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
 
-        return categoryMapper.toDto(category.get());
+        return categoryMapper.toDto(category);
     }
 
     public void Create(CategoryDto categoryDto) {
         categoryRepository.save(categoryMapper.toModel(categoryDto));
     }
 
-    public List<CategoryDto> GetAll(Integer page, Integer size) {
+    public Page<CategoryDto> GetAll(int page, int size) {
 
-        var pageable = PageRequest.of(page, size, Sort.by("Name").ascending());
-        var categoryModels = categoryRepository.findAll(pageable).stream().toList();
-        return categoryMapper.toListDto(categoryModels);
+        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Page<CategoryModel> categories = categoryRepository.findAll(pageable);
+        return categories.map(categoryMapper::toDto);
     }
 
-    public void Update(Long id, CategoryDto categoryDto){
+    public void Update(long id, CategoryDto categoryDto){
 
         if(id <= 0)
-            throw new InvalidParameterException("Set categoryId, please");
+            throw new InvalidParameterException("Set categoryId please");
 
-        var spec = CategorySpecification.hasCategory(id);
-        CategoryModel categoryToChange = categoryRepository.findOne(spec)
+        if(categoryDto.getName().isEmpty())
+            throw new InvalidParameterException("Set the new name of Category please");
+
+        CategoryModel categoryToChange = categoryRepository.findOne(CategorySpecification.hasCategory(id))
                 .orElseThrow(() -> new EntityNotFoundException("Category not found"));
 
-        categoryToChange.Name = categoryDto.Name;
-
+        categoryToChange.setName(categoryDto.getName());
         categoryRepository.save(categoryToChange);
     }
 
@@ -73,15 +75,14 @@ public class CategoryService {
         if(id <= 0)
             throw new InvalidParameterException("Set categoryId, please");
 
-        var productSpec = ProductSpecification.hasCategory(id);
-        Boolean hasSomeProductUsingThisCatId = productRepository.exists(productSpec);
+        Boolean hasSomeProductUsingThisCatId = productRepository.exists(ProductSpecification.hasCategory(id));
 
         if(hasSomeProductUsingThisCatId)
             throw new InvalidDnDOperationException("Can't delete this Category because have some Product using this.");
 
-        var categorySpec = CategorySpecification.hasCategory(id);
-        Optional<CategoryModel> category = categoryRepository.findOne(categorySpec);
+        CategoryModel category = categoryRepository.findOne(CategorySpecification.hasCategory(id))
+                .orElseThrow(() -> new EntityNotFoundException("Category not found"));
 
-        categoryRepository.delete(category.get());
+        categoryRepository.delete(category);
     }
 }

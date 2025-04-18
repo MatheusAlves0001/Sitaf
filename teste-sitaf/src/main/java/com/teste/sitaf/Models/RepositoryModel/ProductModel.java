@@ -9,12 +9,35 @@ public class ProductModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Long Id;
-    public String Name;
-    public Long CategoryID;
-    public BigDecimal Price;
+    private Long id;
+    private String name;
+    private BigDecimal price;
 
     @ManyToOne
-    @JoinColumn(name = "Category_Id")
-    public CategoryModel Category;
+    @JoinColumn(name = "category_id")
+    private CategoryModel category;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CategoryModel getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryModel category) {
+        this.category = category;
+    }
 }

@@ -3,7 +3,15 @@ package com.teste.sitaf.Models.DTOs;
 import jakarta.validation.constraints.NotBlank;
 
 public class CategoryDto {
-
+    private Long id;
     @NotBlank(message = "The category name can't be empty")
-    public String Name;
+    private String name;
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
 }

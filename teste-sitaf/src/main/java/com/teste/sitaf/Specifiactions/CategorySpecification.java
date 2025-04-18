@@ -7,6 +7,6 @@ public class CategorySpecification {
 
     public static Specification<CategoryModel> hasCategory(Long categoryId){
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("Category_Id"), categoryId);
+                criteriaBuilder.equal(root.get("id"), categoryId);
     }
 }

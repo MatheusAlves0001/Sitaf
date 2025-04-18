@@ -9,61 +9,61 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-04-18T04:07:59-0300",
+    date = "2025-04-18T15:46:18-0300",
     comments = "version: 1.6.3, compiler: javac, environment: Java 24.0.1 (Oracle Corporation)"
 )
 @Component
 public class CategoryMapperImpl implements CategoryMapper {
 
     @Override
-    public CategoryModel toModel(CategoryDto categoryDto) {
-        if ( categoryDto == null ) {
+    public CategoryModel toModel(CategoryDto model) {
+        if ( model == null ) {
             return null;
         }
 
         CategoryModel categoryModel = new CategoryModel();
 
-        categoryModel.Name = categoryDto.Name;
+        categoryModel.setName( model.getName() );
 
         return categoryModel;
     }
 
     @Override
-    public CategoryDto toDto(CategoryModel categoryModel) {
-        if ( categoryModel == null ) {
+    public CategoryDto toDto(CategoryModel model) {
+        if ( model == null ) {
             return null;
         }
 
         CategoryDto categoryDto = new CategoryDto();
 
-        categoryDto.Name = categoryModel.Name;
+        categoryDto.setName( model.getName() );
 
         return categoryDto;
     }
 
     @Override
-    public List<CategoryModel> toListModel(List<CategoryDto> categoryDto) {
-        if ( categoryDto == null ) {
+    public List<CategoryModel> toListModel(List<CategoryDto> model) {
+        if ( model == null ) {
             return null;
         }
 
-        List<CategoryModel> list = new ArrayList<CategoryModel>( categoryDto.size() );
-        for ( CategoryDto categoryDto1 : categoryDto ) {
-            list.add( toModel( categoryDto1 ) );
+        List<CategoryModel> list = new ArrayList<CategoryModel>( model.size() );
+        for ( CategoryDto categoryDto : model ) {
+            list.add( toModel( categoryDto ) );
         }
 
         return list;
     }
 
     @Override
-    public List<CategoryDto> toListDto(List<CategoryModel> categoryModel) {
-        if ( categoryModel == null ) {
+    public List<CategoryDto> toListDto(List<CategoryModel> model) {
+        if ( model == null ) {
             return null;
         }
 
-        List<CategoryDto> list = new ArrayList<CategoryDto>( categoryModel.size() );
-        for ( CategoryModel categoryModel1 : categoryModel ) {
-            list.add( toDto( categoryModel1 ) );
+        List<CategoryDto> list = new ArrayList<CategoryDto>( model.size() );
+        for ( CategoryModel categoryModel : model ) {
+            list.add( toDto( categoryModel ) );
         }
 
         return list;

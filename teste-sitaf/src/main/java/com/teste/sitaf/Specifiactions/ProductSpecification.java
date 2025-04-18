@@ -8,6 +8,6 @@ public class ProductSpecification {
 
     public static Specification<ProductModel> hasCategory(Long categoryId){
         return (root, query, criteriaBuilder) ->
-                criteriaBuilder.equal(root.get("CategoryID"), categoryId);
+                criteriaBuilder.equal(root.get("category").get("id"), categoryId);
     }
 }
