@@ -11,12 +11,12 @@ import java.util.function.Predicate;
 
 public class ProductSpecification {
 
-    public static Specification<ProductModel> getByCategoryId(Long categoryId){
+    public static Specification<ProductModel> getByCategoryId(long categoryId){
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("category").get("id"), categoryId);
     }
 
-    public static Specification<ProductModel> getByProductId(Long productId){
+    public static Specification<ProductModel> getByProductId(long productId){
         return (root, query, criteriaBuilder) ->
                 criteriaBuilder.equal(root.get("id"), productId);
     }

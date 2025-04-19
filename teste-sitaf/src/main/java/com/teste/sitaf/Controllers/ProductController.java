@@ -25,8 +25,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<ProductDto>> list(@RequestParam int page, @RequestParam int size, Filters filters) {
-       return ResponseEntity.ok(productService.getAll(page,size,filters)) ;
+    public ResponseEntity<Page<ProductDto>> list(@RequestParam int page, @RequestParam int size, @RequestParam(required = false) Long categoryId) {
+       return ResponseEntity.ok(productService.getAll(page,size,categoryId)) ;
     }
 
     @PatchMapping

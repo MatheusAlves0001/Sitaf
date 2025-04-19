@@ -11,7 +11,7 @@ public class CategoryModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
 
     @OneToMany(mappedBy = "category")
@@ -26,11 +26,11 @@ public class CategoryModel {
         this.name = name;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 

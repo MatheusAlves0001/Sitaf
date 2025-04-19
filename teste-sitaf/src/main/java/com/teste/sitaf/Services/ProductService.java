@@ -46,14 +46,13 @@ public class ProductService {
         productRepository.save(categoryToCreate);
     }
 
-    public Page<ProductDto> getAll(int page, int size, Filters filters){
+    public Page<ProductDto> getAll(int page, int size, Long categoryId){
 
         Specification<ProductModel> spec = null;
+        if(categoryId != null && categoryId > 0)
+            spec = productSpecification.getByCategoryId(categoryId);
 
-        if(filters != null && filters.getCategoryId() > 0)
-            spec = productSpecification.getByCategoryId(filters.getCategoryId());
-
-        Pageable pageable = PageRequest.of(page, size, Sort.by("name").ascending());
+        Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
         Page<ProductModel> product = productRepository.findAll(spec, pageable);
 
         return product.map(productMapper::toDto);
