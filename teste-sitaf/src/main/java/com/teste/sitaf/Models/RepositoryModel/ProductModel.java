@@ -1,5 +1,7 @@
 package com.teste.sitaf.Models.RepositoryModel;
 
+import com.teste.sitaf.Mappers.CategoryMapper;
+import com.teste.sitaf.Mappers.ProductMapper;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
@@ -17,7 +19,7 @@ public class ProductModel {
     @JoinColumn(name = "category_id")
     private CategoryModel category;
 
-    public Long getId() {
+    private Long getId() {
         return id;
     }
 
@@ -39,5 +41,23 @@ public class ProductModel {
 
     public void setCategory(CategoryModel category) {
         this.category = category;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public static ProductModel create(String name, BigDecimal price, CategoryModel category){
+
+        var product = new ProductModel();
+        product.name = name;
+        product.price = price;
+        product.category = category;
+
+        return product;
     }
 }

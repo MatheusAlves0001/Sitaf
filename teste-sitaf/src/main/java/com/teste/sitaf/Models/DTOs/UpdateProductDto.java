@@ -6,23 +6,14 @@ import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
-public class ProductDto {
+public class UpdateProductDto {
 
-//    private long id;
     @NotBlank(message = "The Product name can't be empty")
     private String name;
     @DecimalMin(value = "0.01", inclusive = true, message = "Price should be most bigger then 0.01")
     private BigDecimal price;
     @NotNull(message = "Category is mandatory")
-    public CategoryDetailDto category;
-
-    public String getName(){
-        return name;
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
+    public ChangeCategoryInProductDto category;
 
     public BigDecimal getPrice(){
         return price;
@@ -32,19 +23,19 @@ public class ProductDto {
         this.price = price;
     }
 
-    public CategoryDetailDto getCategory(){
+    public ChangeCategoryInProductDto getCategory(){
         return category;
     }
 
-    public void setCategory(CategoryDetailDto category){
+    public void setCategory(ChangeCategoryInProductDto category){
         this.category = category;
     }
 
-//    public long getId() {
-//       return id;
-//    }
-//
-//   public void setId(long id) {
-//       this.id = id;
-//    }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

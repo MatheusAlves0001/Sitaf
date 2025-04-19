@@ -1,10 +1,15 @@
 package com.teste.sitaf.Controllers;
 
+import com.teste.sitaf.Models.DTOs.CategoryDetailDto;
 import com.teste.sitaf.Models.DTOs.CategoryDto;
+import com.teste.sitaf.Models.DTOs.CreateCategoryDto;
+import com.teste.sitaf.Models.DTOs.UpdateCategoryDto;
 import com.teste.sitaf.Services.CategoryService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/Category")
@@ -17,29 +22,28 @@ public class CategoryController {
     }
 
     @PostMapping
-    public void Create(@RequestBody CategoryDto model) {
-        categoryService.Create(model);
+    public void create(@RequestBody CreateCategoryDto model) {
+        categoryService.create(model);
     }
 
     @GetMapping("list")
-    public ResponseEntity<Page<CategoryDto>> List(@RequestParam int page, @RequestParam int size) {
-
-        Page<CategoryDto> response = categoryService.GetAll(page, size);
+    public ResponseEntity<List<CategoryDetailDto>> list() {
+        var response = categoryService.GetAll();
         return ResponseEntity.ok(response);
     }
 
     @PatchMapping()
-    public void Update(@RequestParam long id, @RequestBody CategoryDto model) {
-        categoryService.Update(id, model);
+    public void update(@RequestParam long id, @RequestBody UpdateCategoryDto model) {
+        categoryService.update(id, model);
     }
 
     @DeleteMapping("/{id}")
-    public void Delete(@PathVariable long id) {
-        categoryService.Delete(id);
+    public void delete(@PathVariable long id) {
+        categoryService.delete(id);
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<CategoryDto> Get(@PathVariable long id) {
-       return ResponseEntity.ok(categoryService.Get(id));
+    public ResponseEntity<CategoryDto> get(@PathVariable long id) {
+       return ResponseEntity.ok(categoryService.get(id));
     }
 }
