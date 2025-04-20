@@ -1,4 +1,4 @@
-package com.teste.sitaf.Models.RepositoryModel;
+package com.teste.sitaf.Models;
 
 import jakarta.persistence.*;
 
@@ -22,7 +22,7 @@ public class CategoryModel {
     }
 
     public void setName(String name){
-        if(name.isEmpty()) throw new InvalidParameterException("Name can't be null");
+        if(name == null || name.isEmpty()) throw new InvalidParameterException("Name canot be empty");
         this.name = name;
     }
 
@@ -36,9 +36,19 @@ public class CategoryModel {
 
     public static CategoryModel create(String name){
 
+        if(name == null || name.isEmpty()) throw new InvalidParameterException("Name canot be empty");
+
         var category = new CategoryModel();
         category.setName(name);
 
         return category;
+    }
+
+    public List<ProductModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductModel> products) {
+        this.products = products;
     }
 }

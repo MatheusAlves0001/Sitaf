@@ -1,12 +1,7 @@
 package com.teste.sitaf.Specifiactions;
 
-import com.teste.sitaf.Models.RepositoryModel.ProductModel;
+import com.teste.sitaf.Models.ProductModel;
 import org.springframework.data.jpa.domain.Specification;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Predicate;
 
 
 public class ProductSpecification {

@@ -1,9 +1,8 @@
-package com.teste.sitaf.Models.RepositoryModel;
+package com.teste.sitaf.Models;
 
-import com.teste.sitaf.Mappers.CategoryMapper;
-import com.teste.sitaf.Mappers.ProductMapper;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
+import java.security.InvalidParameterException;
 
 @Entity
 @Table(name = "Product")
@@ -19,7 +18,7 @@ public class ProductModel {
     @JoinColumn(name = "category_id")
     private CategoryModel category;
 
-    private Long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -32,6 +31,10 @@ public class ProductModel {
     }
 
     public void setName(String name) {
+
+        if(name == null || name.isEmpty())
+            throw new InvalidParameterException("Name canot be empty");
+
         this.name = name;
     }
 
@@ -52,6 +55,12 @@ public class ProductModel {
     }
 
     public static ProductModel create(String name, BigDecimal price, CategoryModel category){
+
+        if(name == null || name.isEmpty())
+            throw new InvalidParameterException("Name canot be empty");
+
+        if(price.compareTo(BigDecimal.valueOf(0.01)) < 0)
+            throw new InvalidParameterException("Price should be most bigger then 0.01");
 
         var product = new ProductModel();
         product.name = name;

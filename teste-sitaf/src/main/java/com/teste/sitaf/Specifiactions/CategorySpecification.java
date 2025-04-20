@@ -1,6 +1,6 @@
 package com.teste.sitaf.Specifiactions;
 
-import com.teste.sitaf.Models.RepositoryModel.CategoryModel;
+import com.teste.sitaf.Models.CategoryModel;
 import org.springframework.data.jpa.domain.Specification;
 
 public class CategorySpecification {

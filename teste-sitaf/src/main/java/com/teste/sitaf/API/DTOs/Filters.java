@@ -1,4 +1,4 @@
-package com.teste.sitaf.Models.DTOs;
+package com.teste.sitaf.API.DTOs;
 
 public class Filters {
     private long categoryId;

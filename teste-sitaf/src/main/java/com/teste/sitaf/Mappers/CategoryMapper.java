@@ -1,10 +1,9 @@
 package com.teste.sitaf.Mappers;
 
-import com.teste.sitaf.Models.DTOs.CategoryDetailDto;
-import com.teste.sitaf.Models.DTOs.CategoryDto;
-import com.teste.sitaf.Models.RepositoryModel.CategoryModel;
+import com.teste.sitaf.API.DTOs.CategoryDetailDto;
+import com.teste.sitaf.API.DTOs.CategoryDto;
+import com.teste.sitaf.Models.CategoryModel;
 import org.mapstruct.Mapper;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 

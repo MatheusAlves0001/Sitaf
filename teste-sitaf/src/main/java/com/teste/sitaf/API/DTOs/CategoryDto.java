@@ -1,6 +1,8 @@
-package com.teste.sitaf.Models.DTOs;
+package com.teste.sitaf.API.DTOs;
 
 import jakarta.validation.constraints.NotBlank;
+
+import java.security.InvalidParameterException;
 
 public class CategoryDto {
 
@@ -8,9 +10,10 @@ public class CategoryDto {
     private String name;
 
     public void setName(String name){
+
+        if(name == null || name.isEmpty()) throw new InvalidParameterException("Name canot be empty");
         this.name = name;
     }
-
     public String getName(){
         return name;
     }

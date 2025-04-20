@@ -1,11 +1,11 @@
 package com.teste.sitaf.Services;
 
 import com.teste.sitaf.Mappers.CategoryMapper;
-import com.teste.sitaf.Models.DTOs.CategoryDetailDto;
-import com.teste.sitaf.Models.DTOs.CategoryDto;
-import com.teste.sitaf.Models.DTOs.CreateCategoryDto;
-import com.teste.sitaf.Models.DTOs.UpdateCategoryDto;
-import com.teste.sitaf.Models.RepositoryModel.CategoryModel;
+import com.teste.sitaf.API.DTOs.CategoryDetailDto;
+import com.teste.sitaf.API.DTOs.CategoryDto;
+import com.teste.sitaf.API.DTOs.CreateCategoryDto;
+import com.teste.sitaf.API.DTOs.UpdateCategoryDto;
+import com.teste.sitaf.Models.CategoryModel;
 import com.teste.sitaf.Repositories.CategoryRepository;
 import com.teste.sitaf.Repositories.ProductRepository;
 import com.teste.sitaf.Specifiactions.CategorySpecification;

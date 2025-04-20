@@ -1,19 +1,30 @@
-package com.teste.sitaf.Models.DTOs;
+package com.teste.sitaf.API.DTOs;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
+import java.security.InvalidParameterException;
 
-public class UpdateProductDto {
+public class ProductDto {
 
+//    private long id;
     @NotBlank(message = "The Product name can't be empty")
     private String name;
     @DecimalMin(value = "0.01", inclusive = true, message = "Price should be most bigger then 0.01")
     private BigDecimal price;
     @NotNull(message = "Category is mandatory")
-    public ChangeCategoryInProductDto category;
+    public CategoryDetailDto category;
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name){
+        if(name == null || name.isEmpty()) throw new InvalidParameterException("The Product name can't be empty");
+        this.name = name;
+    }
 
     public BigDecimal getPrice(){
         return price;
@@ -23,19 +34,19 @@ public class UpdateProductDto {
         this.price = price;
     }
 
-    public ChangeCategoryInProductDto getCategory(){
+    public CategoryDetailDto getCategory(){
         return category;
     }
 
-    public void setCategory(ChangeCategoryInProductDto category){
+    public void setCategory(CategoryDetailDto category){
         this.category = category;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+//    public long getId() {
+//       return id;
+//    }
+//
+//   public void setId(long id) {
+//       this.id = id;
+//    }
 }

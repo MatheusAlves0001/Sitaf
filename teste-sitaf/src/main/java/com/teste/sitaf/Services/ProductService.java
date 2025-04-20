@@ -2,12 +2,11 @@ package com.teste.sitaf.Services;
 
 
 import com.teste.sitaf.Mappers.ProductMapper;
-import com.teste.sitaf.Models.DTOs.CreateProductDto;
-import com.teste.sitaf.Models.DTOs.Filters;
-import com.teste.sitaf.Models.DTOs.ProductDto;
-import com.teste.sitaf.Models.DTOs.UpdateProductDto;
-import com.teste.sitaf.Models.RepositoryModel.CategoryModel;
-import com.teste.sitaf.Models.RepositoryModel.ProductModel;
+import com.teste.sitaf.API.DTOs.CreateProductDto;
+import com.teste.sitaf.API.DTOs.ProductDto;
+import com.teste.sitaf.API.DTOs.UpdateProductDto;
+import com.teste.sitaf.Models.CategoryModel;
+import com.teste.sitaf.Models.ProductModel;
 import com.teste.sitaf.Repositories.CategoryRepository;
 import com.teste.sitaf.Repositories.ProductRepository;
 import com.teste.sitaf.Specifiactions.CategorySpecification;
@@ -53,7 +52,7 @@ public class ProductService {
             spec = productSpecification.getByCategoryId(categoryId);
 
         Pageable pageable = PageRequest.of(page, size, Sort.by("id").ascending());
-        Page<ProductModel> product = productRepository.findAll(spec, pageable);
+        var product = productRepository.findAll(spec, pageable);
 
         return product.map(productMapper::toDto);
     }
@@ -91,5 +90,4 @@ public class ProductService {
 
         return productMapper.toDto(product);
     }
-
 }
